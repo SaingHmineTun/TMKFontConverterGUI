@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+it.saimao.shan_converter.FontConverter.Main-Class: it.saimao.shan_converter.FontConverter.Main
+
