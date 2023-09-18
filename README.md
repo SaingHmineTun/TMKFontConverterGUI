@@ -1,27 +1,15 @@
-# Tai_Nuea_Tools
+# TMK Font Converter
 
-ပဵၼ်ဢၼ်ပိၼ်ႇလိၵ်ႈ တႆးတူဝ်မူၼ်း လႄႈ တႆးတူဝ်ယၢဝ်း တႃႇၸႂ်ႉၼႂ်းၶွမ်းယဝ်ႉ။
-ၵွပ်ႈပိူဝ်ႈပဵၼ် Java လႄႈ မိူဝ်ႈပႆႇၸႂ်ႉၼၼ်ႉ သႂ်ႇ JDK ဢမ်ႇၼၼ် JRE ဝႆႉ ၼႂ်းၶွမ်းတႃႉ။
-Project ပဵၼ် Java Swing ယဝ်ႉ။  
+## This is the main UI where you can convert from Shan Unicode to Shan Zawgyi and vice versa.
+![image](https://github.com/SaingHmineTun/TMKFontConverterGUI/assets/41017501/695fcba5-7b1f-43d2-8746-c69213b13a10)
 
-## မီးသင်လၢႆလၢႆ
+## This is file name converter. It is used to convert file name to Unicode.
 
-ဢၼ်လွင်ႈယႂ်ႇၼႆႉ ၼႂ်းမၼ်းတေမီးဝႆႉ Syllable Breaker & Converter
-Syllable Breaker ၼႆႉ လႆႈသိမ်းဝႆႉၼႂ်း breaker package. မီးဝႆႉ တႃႇ break
-လိၵ်ႈတႆးတူဝ်မူၼ်းလႄႈ လိၵ်ႈတႆႈတူဝ်ယၢဝ်း။ it.saimao.shan_converter.FontConverter.converter ၸိူဝ်းၼႆ့ မီးဝႆႉၼႂ်း it.saimao.shan_converter.FontConverter.converter package. 
+![image](https://github.com/SaingHmineTun/TMKFontConverterGUI/assets/41017501/3157065b-0363-4365-b61b-4679ca8165c1)
 
-တႃႇတေလႆႈႁၼ် ၾွၼ်ႉ လိၵ်ႈတူဝ်ယၢဝ်းလႄႈ တူဝ်မူၼ်းတီႈၶွမ်းၵူႊလုၵ်ႈၼႆႉ
-လႆႈႁဵတ့်ဝႆႉပၼ် Font Face ယဝ်ႉ။ တႃႇတူဝ်ယၢဝ်း လႆႈၸႂ်ႉတိုဝ်း Microsoft Tai Le.ttf 
-လႄႈ တႃႇတူဝ်မူၼ်းၼႆႉ လႆႈၸႂ်ႉတိုဝ်း Pyidaungsu.tff ဝႆႉယဝ်ႉ။
+## When enable Popup Converter, whenever you copy something from your pc, the popup like this will popup.
 
-## လၢႆးၸႂ်ႉတိုဝ်း
-Software ဢၼ်ၼႆႉတေမီးဝႆႉ Text Are သွင်ဢၼ်။ ဢၼ်ၼိူဝ်မၼ်း ပဵၼ်တီႈဢၼ်ႁဝ်းတႅမ်ႈလိၵ်ႈ။
-ဢၼ်တႂ်ႈမၼ်းသမ်ႉ ပဵၼ်ဢွင်ႈၼႄပၼ် လိၵ်ႈဢၼ်ပိၼ်ႇဝႆႉ။ 
-ပေႃးသူတႅမ်ႈလိၵ်ႈတႆးတူဝ်မူၼ်းၼႆ 
-* **ပေႃးၼဵၵ်းပၼ် Convert ၼႆ တီႈတႂ်ႈၼၼ်ႉ သူတေလႆႈႁၼ် လိၵ်တူဝ်ယၢဝ်း။**
-* **ပေႃးၼဵၵ်ႉပၼ် Convert AND Break ၼႆ တေပိၼ်ႇပဵၼ် လိၵ်တူဝ်ယၢဝ်းသေဢမ်ႇၵႃး တေ syllable break ပၼ် လိၵ်ႈတူဝ်ယၢဝ်းယဝ်ႉ။**
-* **ပေႃးၼဵၵ်းပၼ် Syllable Break ၼႆၸိုင် တေဢဝ် လိၵ်ႈဢၼ်မီးတီႈၼိူဝ်သေ syllable break ပၼ်ယဝ်ႉ။**
+![image](https://github.com/SaingHmineTun/TMKFontConverterGUI/assets/41017501/5f524fd3-3c07-45f3-8dcc-3d6cdf69e692)
 
-`Syllable break ဢၼ်ဝႃႈၼႆႉ ဢဝ်လိၵ်ႈတႆးႁဝ်းသေ သႂ်ႇပၼ် space မၼ်း တီႈၵူႊတူဝ်တူဝ်ယဝ်ႉ။
-မိူၼ်ၼင်ႇ မၼ်းတေပိၼ်ႇ မႂ်ႇသုင်ၶႃႈ ပဵၼ် မႂ်ႇ သုင် ၶႃႈ (ᥛᥬᥱᥔᥧᥒᥴᥑᥣᥲ ᥙᥥᥢᥴ ᥛᥬᥱ ᥔᥧᥒᥴ ᥑᥣᥲ) ယဝ်ႉ။
-`
+
+
