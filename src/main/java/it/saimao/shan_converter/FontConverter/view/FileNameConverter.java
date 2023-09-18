@@ -6,6 +6,7 @@ import it.saimao.shan_converter.FontConverter.toast.Toast;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.uni2zg;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.zg2uni;
@@ -17,6 +18,8 @@ public class FileNameConverter extends JDialog {
     //    private JFileChooser input, output;
     private File folder;
 
+    private Font uiFont;
+
     public FileNameConverter(JFrame parent) {
         super(parent, "File Name Converter", true);
         setLayout(new FlowLayout());
@@ -26,6 +29,8 @@ public class FileNameConverter extends JDialog {
         inputFolder.setMode(JFilePicker.MODE_SAVE);
         inputFolder.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 //        input = inputFolder.getFileChooser();
+
+        initDesign();
 
         JPanel panel = new JPanel();
         FlowLayout layout1 = new FlowLayout();
@@ -56,11 +61,23 @@ public class FileNameConverter extends JDialog {
         add(inputFolder);
         add(panel);
 
+
+        try {
+            uiFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(14f);
+            btConvert.setFont(uiFont);
+            cbAutoDetect.setFont(uiFont);
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setSize(600, 159);
+        setSize(600, 150);
         setLocationRelativeTo(null);    // center on screen
         setVisible(true);
+    }
+
+    private void initDesign() {
     }
 
     private void convertFileNameToUnicode() {
