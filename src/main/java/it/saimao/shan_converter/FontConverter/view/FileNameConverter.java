@@ -62,8 +62,8 @@ public class FileNameConverter extends JDialog {
         add(panel);
 
 
-        btConvert.setFont(getAppFont());
-        cbAutoDetect.setFont(getAppFont());
+        btConvert.setFont(getAppFont(14f));
+        cbAutoDetect.setFont(getAppFont(14f));
 
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

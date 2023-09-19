@@ -12,6 +12,19 @@ public class Utils {
     private static Font zgFont;
     private static Font appFont;
 
+
+    private static String theme;
+
+    public static boolean isEnablePopupConverter() {
+        return enablePopupConverter;
+    }
+
+    public static void setEnablePopupConverter(boolean enablePopupConverter) {
+        Utils.enablePopupConverter = enablePopupConverter;
+    }
+
+    private static boolean enablePopupConverter;
+
     public static boolean isShowCopyDialog() {
         return showCopyDialog;
     }
@@ -68,4 +81,24 @@ public class Utils {
 
         return appFont;
     }
+
+    public static Font getAppFont(float fontSize) {
+        Font appFontWithSize;
+        try {
+            appFontWithSize = Font.createFont(Font.TRUETYPE_FONT, Utils.class.getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(fontSize);
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        return appFontWithSize;
+    }
+
+
+    public static String getTheme() {
+        return theme;
+    }
+
+    public static void setTheme(String theme) {
+        Utils.theme = theme;
+    }
+
 }

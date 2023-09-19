@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.uni2zg;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.zg2uni;
 import static it.saimao.shan_converter.FontConverter.detector.ShanZawgyiDetector.isShanZawgyi;
+import static it.saimao.shan_converter.FontConverter.utils.ThemeManager.*;
 import static it.saimao.shan_converter.FontConverter.utils.Utils.*;
 
 public class MaoConverterController implements ActionListener, ChangeListener {
@@ -29,6 +30,7 @@ public class MaoConverterController implements ActionListener, ChangeListener {
     private JTextArea edInput, edOutput;
     private JButton btConvert, btClear, btCopy, btCopyUni, btCopyZg;
     private JRadioButton rbZg2Uni, rbUni2Zg;
+    private JRadioButtonMenuItem light, dark, intellij, dracula, macLight, macDark;
     private JLabel lbInput, lbOutput;
     private JMenuItem open, save, exit;
     private JCheckBoxMenuItem enablePopup;
@@ -59,10 +61,20 @@ public class MaoConverterController implements ActionListener, ChangeListener {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 clipboardListener = new ClipboardTextListener(maoConverter);
                 new Thread(clipboardListener).start();
+                Utils.setEnablePopupConverter(true);
             } else if (e.getStateChange() == ItemEvent.DESELECTED) {
                 clipboardListener.terminate();
+                Utils.setEnablePopupConverter(false);
             }
         });
+
+        // Theme
+        light.addActionListener(listener);
+        dark.addActionListener(listener);
+        intellij.addActionListener(listener);
+        dracula.addActionListener(listener);
+        macLight.addActionListener(listener);
+        macDark.addActionListener(listener);
     }
 
     private void initializeMenubar() {
@@ -99,10 +111,54 @@ public class MaoConverterController implements ActionListener, ChangeListener {
         tool.add(fileNameConverter);
         tool.add(enablePopup);
 
+        // Theme Menu
+        JMenu theme = new JMenu("Theme");
+        theme.setFont(getAppFont());
+        light = new JRadioButtonMenuItem("Light");
+        light.setFont(getAppFont());
+        dark = new JRadioButtonMenuItem("Dark");
+        dark.setFont(getAppFont());
+        intellij = new JRadioButtonMenuItem("IntelliJ");
+        intellij.setFont(getAppFont());
+        dracula = new JRadioButtonMenuItem("Dracula");
+        dracula.setFont(getAppFont());
+        macLight = new JRadioButtonMenuItem("Mac Light");
+        macLight.setFont(getAppFont());
+        macDark = new JRadioButtonMenuItem("Mac Dark");
+        macDark.setFont(getAppFont());
+        theme.add(light);
+        theme.add(dark);
+        theme.add(intellij);
+        theme.add(dracula);
+        theme.add(macLight);
+        theme.add(macDark);
+        selectThemeAtStart();
+
+        // Add the radio button to the group
+        ButtonGroup rg = new ButtonGroup();
+        rg.add(light);
+        rg.add(dark);
+        rg.add(intellij);
+        rg.add(dracula);
+        rg.add(macLight);
+        rg.add(macDark);
+
         // Add Menu to MenuBar
         menuBar.add(file);
         menuBar.add(tool);
+        menuBar.add(theme);
         maoConverter.setJMenuBar(menuBar);
+    }
+
+    private void selectThemeAtStart() {
+        switch (Utils.getTheme()) {
+            case LIGHT -> light.setSelected(true);
+            case DARK -> dark.setSelected(true);
+            case DRACULA -> dracula.setSelected(true);
+            case INTELLIJ -> intellij.setSelected(true);
+            case MAC_DARK -> macDark.setSelected(true);
+            case MAC_LIGHT -> macLight.setSelected(true);
+        }
     }
 
 
