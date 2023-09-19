@@ -1,14 +1,10 @@
 package it.saimao.shan_converter.FontConverter.view;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.ui.FlatTitlePane;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+
+import static it.saimao.shan_converter.FontConverter.utils.Utils.getAppFont;
 
 public class MaoConverter extends JFrame {
     private JTextArea edInput;
@@ -55,7 +51,6 @@ public class MaoConverter extends JFrame {
         designUi();
 
         setSize(900, 600);
-        setExtendedState(MAXIMIZED_BOTH);
         setDefaultLookAndFeelDecorated(true);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
@@ -74,22 +69,19 @@ public class MaoConverter extends JFrame {
         btCopyInput.setPreferredSize(btDimension);
         btCopyOutput.setPreferredSize(btDimension);
 
-        Font uniFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(16f);
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(uniFont);
-
         Font titleFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(20f).deriveFont(Font.BOLD);
         UIManager.put("TitlePane.font", titleFont);
 
-        btConvert.setFont(uniFont);
-        btClear.setFont(uniFont);
-        btCopy.setFont(uniFont);
-        btCopyInput.setFont(uniFont);
-        btCopyOutput.setFont(uniFont);
-        rbUni2Zg.setFont(uniFont);
-        rbZg2Uni.setFont(uniFont);
-        lbInput.setFont(uniFont);
-        lbOutput.setFont(uniFont);
+        Font appFont = getAppFont();
+        btConvert.setFont(appFont);
+        btClear.setFont(appFont);
+        btCopy.setFont(appFont);
+        btCopyInput.setFont(appFont);
+        btCopyOutput.setFont(appFont);
+        rbUni2Zg.setFont(appFont);
+        rbZg2Uni.setFont(appFont);
+        lbInput.setFont(appFont);
+        lbOutput.setFont(appFont);
 
     }
 

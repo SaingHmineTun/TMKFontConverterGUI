@@ -3,8 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/FontConverter_jar</output-path>
     <root id="archive" name="FontConverter.jar">
       <element id="module-output" name="FontConverter" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.2.1/flatlaf-3.2.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20230618/json-20230618.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.2.1/flatlaf-3.2.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

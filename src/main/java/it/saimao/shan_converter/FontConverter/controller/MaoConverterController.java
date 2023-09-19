@@ -21,13 +21,13 @@ import java.util.ArrayList;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.uni2zg;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.zg2uni;
 import static it.saimao.shan_converter.FontConverter.detector.ShanZawgyiDetector.isShanZawgyi;
+import static it.saimao.shan_converter.FontConverter.utils.Utils.*;
 
 public class MaoConverterController implements ActionListener, ChangeListener {
 
     public MaoConverter maoConverter;
     private JTextArea edInput, edOutput;
     private JButton btConvert, btClear, btCopy, btCopyUni, btCopyZg;
-    private Font zgFont, uniFont, uiFont;
     private JRadioButton rbZg2Uni, rbUni2Zg;
     private JLabel lbInput, lbOutput;
     private JMenuItem open, save, exit;
@@ -35,7 +35,6 @@ public class MaoConverterController implements ActionListener, ChangeListener {
     private ClipboardTextListener clipboardListener;
     private JMenuItem fileNameConverter;
 
-    private Font font;
 
     public MaoConverterController() throws IOException, FontFormatException {
         initializeComponents();
@@ -70,33 +69,33 @@ public class MaoConverterController implements ActionListener, ChangeListener {
 
         // Menu Bar
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setFont(uiFont);
+        menuBar.setFont(getAppFont());
 
         // File Menu
         JMenu file = new JMenu("File");
-        file.setFont(uiFont);
+        file.setFont(getAppFont());
         open = new JMenuItem("Open");
-        open.setFont(uiFont);
+        open.setFont(getAppFont());
         open.setToolTipText("Open text file and import to input text");
         save = new JMenuItem("Save");
-        save.setFont(uiFont);
+        save.setFont(getAppFont());
         save.setToolTipText("Save output text as text file");
         exit = new JMenuItem("Exit");
         exit.setToolTipText("Exit");
-        exit.setFont(uiFont);
+        exit.setFont(getAppFont());
         file.add(open);
         file.add(save);
         file.add(exit);
 
         // Tool Menu
         JMenu tool = new JMenu("Tool");
-        tool.setFont(uiFont);
+        tool.setFont(getAppFont());
         enablePopup = new JCheckBoxMenuItem("Enable Popup Converter");
         enablePopup.setToolTipText("Enable Dialog Convert when copy text!");
-        enablePopup.setFont(uiFont);
+        enablePopup.setFont(getAppFont());
         fileNameConverter = new JMenuItem("File Name Converter");
         fileNameConverter.setToolTipText("Convert file name written in Tai Nuea to Shan");
-        fileNameConverter.setFont(uiFont);
+        fileNameConverter.setFont(getAppFont());
         tool.add(fileNameConverter);
         tool.add(enablePopup);
 
@@ -110,10 +109,10 @@ public class MaoConverterController implements ActionListener, ChangeListener {
     private void initializeAppIcons() {
 
         ArrayList<Image> icons = new ArrayList<>();
-        icons.add(new ImageIcon(getClass().getResource("/icons/logo_512.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/icons/logo_256.png")).getImage());
-        icons.add(new ImageIcon(getClass().getResource("/icons/logo_128.png")).getImage());
         icons.add(new ImageIcon(getClass().getResource("/icons/logo_64.png")).getImage());
+        icons.add(new ImageIcon(getClass().getResource("/icons/logo_128.png")).getImage());
+        icons.add(new ImageIcon(getClass().getResource("/icons/logo_256.png")).getImage());
+//        icons.add(new ImageIcon(getClass().getResource("/icons/logo_512.png")).getImage());
         maoConverter.setIconImages(icons);
 
     }
@@ -131,14 +130,6 @@ public class MaoConverterController implements ActionListener, ChangeListener {
 
     private void initializeComponents() throws IOException, FontFormatException {
         maoConverter = new MaoConverter();
-        try {
-            zgFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/zawgyi.ttf")).deriveFont(16f);
-            uniFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/myanmar_taung_thu.ttf")).deriveFont(16f);
-            uiFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(18f);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
-
         edInput = maoConverter.getEdInput();
         edInput.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -161,9 +152,9 @@ public class MaoConverterController implements ActionListener, ChangeListener {
 
             }
         });
-        edInput.setFont(uniFont);
+        edInput.setFont(getUniFont());
         edOutput = maoConverter.getEdOutput();
-        edOutput.setFont(zgFont);
+        edOutput.setFont(getZgFont());
         btConvert = maoConverter.getBtConvert();
         btClear = maoConverter.getBtClear();
         btCopy = maoConverter.getBtCopy();
@@ -244,27 +235,23 @@ public class MaoConverterController implements ActionListener, ChangeListener {
 
     }
 
-    private boolean isUni2Zg = true;
-
     @Override
     public void stateChanged(ChangeEvent changeEvent) {
         /*
         To prevent multiple change event from firing,
         I just re-assure with boolean value
          */
-        if (rbUni2Zg.isSelected() && isUni2Zg) {
+        if (rbUni2Zg.isSelected()) {
 
             lbInput.setText("Shan Unicode");
             lbOutput.setText("Shan Zawgyi");
-            edInput.setFont(uniFont);
-            edOutput.setFont(zgFont);
-            isUni2Zg = false;
-        } else if (rbZg2Uni.isSelected() && !isUni2Zg) {
+            edInput.setFont(getUniFont());
+            edOutput.setFont(getZgFont());
+        } else if (rbZg2Uni.isSelected()) {
             lbInput.setText("Shan Zawgyi");
             lbOutput.setText("Shan Unicode");
-            edInput.setFont(zgFont);
-            edOutput.setFont(uniFont);
-            isUni2Zg = true;
+            edInput.setFont(getZgFont());
+            edOutput.setFont(getUniFont());
         }
     }
 }

@@ -1,6 +1,7 @@
 package it.saimao.shan_converter.FontConverter.listener;
 
 import it.saimao.shan_converter.FontConverter.controller.MaoConverterController;
+import it.saimao.shan_converter.FontConverter.toast.Toast;
 import it.saimao.shan_converter.FontConverter.view.FileNameConverter;
 import it.saimao.shan_converter.FontConverter.view.MaoConverter;
 
@@ -25,6 +26,7 @@ public class MenuItemListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equalsIgnoreCase("open")) {
+
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
             chooser.setFileFilter(filter);
@@ -35,10 +37,11 @@ public class MenuItemListener implements ActionListener {
                     InputStream inputStream = new FileInputStream(file);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     String string;
-                    jFrame.getEdInput().setText("");
+                    StringBuilder sb = new StringBuilder();
                     while ((string = reader.readLine()) != null) {
-                        jFrame.getEdInput().append(string);
+                        sb.append(string);
                     }
+                    jFrame.getEdInput().setText(sb.toString());
                     reader.close();
                     inputStream.close();
                 } catch (FileNotFoundException ex) {
@@ -63,6 +66,7 @@ public class MenuItemListener implements ActionListener {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+                new Toast("File has been saved successfully!").showToast(jFrame.getX() + jFrame.getWidth() / 2, jFrame.getY() + jFrame.getHeight() / 2 + jFrame.getHeight() / 3);
             }
         } else if (e.getActionCommand().equalsIgnoreCase("exit")) {
             System.exit(0);

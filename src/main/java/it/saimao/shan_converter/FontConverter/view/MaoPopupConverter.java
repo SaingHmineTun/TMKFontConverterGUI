@@ -3,14 +3,13 @@ package it.saimao.shan_converter.FontConverter.view;
 import it.saimao.shan_converter.FontConverter.utils.Utils;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.uni2zg;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.zg2uni;
 import static it.saimao.shan_converter.FontConverter.detector.ShanZawgyiDetector.isShanZawgyi;
+import static it.saimao.shan_converter.FontConverter.utils.Utils.*;
 
 public class MaoPopupConverter extends JDialog implements ActionListener {
     private JTextArea taResult;
@@ -18,7 +17,6 @@ public class MaoPopupConverter extends JDialog implements ActionListener {
     private JButton btConvert;
     private JButton btCopy;
     private static MaoPopupConverter maoPopupConverter;
-    private Font uniFont, zgFont, uiFont;
 
     public static MaoPopupConverter getInstance() {
         if (maoPopupConverter == null) {
@@ -47,26 +45,20 @@ public class MaoPopupConverter extends JDialog implements ActionListener {
         setResizable(false);
         // TODO : Set icon image for copy converter
 //        setIconImage(getIconImages().get(2));
-        try {
-            uniFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/myanmar_taung_thu.ttf")).deriveFont(16f);
-            zgFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/zawgyi.ttf")).deriveFont(15f);
-            uiFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(18f);
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
-        taResult.setFont(uniFont);
-        btConvert.setFont(uiFont);
-        btCopy.setFont(uiFont);
+
+        taResult.setFont(getUniFont());
+        btConvert.setFont(getAppFont());
+        btCopy.setFont(getAppFont());
     }
 
     public void show(String str) {
         String convertedString;
         if (isShanZawgyi(str)) {
             convertedString = zg2uni(str);
-            taResult.setFont(uniFont);
+            taResult.setFont(getUniFont());
         } else {
             convertedString = uni2zg(str);
-            taResult.setFont(zgFont);
+            taResult.setFont(getZgFont());
         }
         taResult.setText(convertedString);
         setVisible(true);
@@ -83,10 +75,10 @@ public class MaoPopupConverter extends JDialog implements ActionListener {
              */
             if (isShanZawgyi(taResult.getText())) {
                 convertedText = zg2uni(taResult.getText());
-                taResult.setFont(uniFont);
+                taResult.setFont(getUniFont());
             } else {
                 convertedText = uni2zg(taResult.getText());
-                taResult.setFont(zgFont);
+                taResult.setFont(getZgFont());
             }
             taResult.setText(convertedText);
         } else if (e.getActionCommand().equalsIgnoreCase("copy")) {

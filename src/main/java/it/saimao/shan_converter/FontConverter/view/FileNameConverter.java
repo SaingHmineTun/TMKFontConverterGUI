@@ -11,14 +11,13 @@ import java.io.IOException;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.uni2zg;
 import static it.saimao.shan_converter.FontConverter.converter.ShanZawgyiConverter.zg2uni;
 import static it.saimao.shan_converter.FontConverter.detector.ShanZawgyiDetector.isShanZawgyi;
+import static it.saimao.shan_converter.FontConverter.utils.Utils.getAppFont;
 
 public class FileNameConverter extends JDialog {
 
     private final JCheckBox cbAutoDetect;
-    //    private JFileChooser input, output;
     private File folder;
 
-    private Font uiFont;
 
     public FileNameConverter(JFrame parent) {
         super(parent, "File Name Converter", true);
@@ -63,13 +62,9 @@ public class FileNameConverter extends JDialog {
         add(panel);
 
 
-        try {
-            uiFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(14f);
-            btConvert.setFont(uiFont);
-            cbAutoDetect.setFont(uiFont);
-        } catch (FontFormatException | IOException e) {
-            throw new RuntimeException(e);
-        }
+        btConvert.setFont(getAppFont());
+        cbAutoDetect.setFont(getAppFont());
+
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
