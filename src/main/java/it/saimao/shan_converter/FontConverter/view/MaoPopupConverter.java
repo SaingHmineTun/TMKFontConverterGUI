@@ -39,12 +39,14 @@ public class MaoPopupConverter extends JDialog implements ActionListener {
 
     private void initializeUI() {
         setContentPane(contentPane);
-        setSize(400, 275);
+        setSize(400, 300);
         setAlwaysOnTop(true);
-        setTitle("Tai Nuea Tools");
+        setTitle("Copy Converter");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setResizable(false);
+        // TODO : Set icon image for copy converter
+//        setIconImage(getIconImages().get(2));
         try {
             uniFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/myanmar_taung_thu.ttf")).deriveFont(16f);
             zgFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/zawgyi.ttf")).deriveFont(15f);

@@ -25,7 +25,7 @@ public class FileNameConverter extends JDialog {
         setLayout(new FlowLayout());
 
         // set up a file picker component
-        JFilePicker inputFolder = new JFilePicker("Choose input folder", "Browse...");
+        JFilePicker inputFolder = new JFilePicker("Location : ", "Choose");
         inputFolder.setMode(JFilePicker.MODE_SAVE);
         inputFolder.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 //        input = inputFolder.getFileChooser();
@@ -38,11 +38,12 @@ public class FileNameConverter extends JDialog {
         panel.setLayout(layout1);
 
         cbAutoDetect = new JCheckBox("Auto Detect");
-        cbAutoDetect.setToolTipText("If enabled, it.saimao.shan_converter.FontConverter.converter will only convert Zawgyi file name!");
-
+        cbAutoDetect.setToolTipText("If enabled, Converter will only convert Zawgyi file name!");
+        cbAutoDetect.setPreferredSize(new Dimension(100, 40));
         // Create a convert Button
         JButton btConvert = new JButton("Convert to Unicode");
         btConvert.setToolTipText("Will convert all file name to Unicode!");
+        btConvert.setPreferredSize(new Dimension(150, 40));
         btConvert.addActionListener(e -> {
             if (inputFolder.isFolderSelected()) {
                 folder = inputFolder.getFile();
@@ -88,17 +89,19 @@ public class FileNameConverter extends JDialog {
         if (inputFolder != null) {
             for (File file : inputFolder) {
                 String convertedName;
-                if (autoDetect) {
-                    if (isShanZawgyi(file.getName())) {
-                        convertedName = zg2uni(file.getName());
-                        file.renameTo(new File(folder, convertedName));
-                    }
+                if (autoDetect && isShanZawgyi(file.getName())) {
+                    convertedName = zg2uni(file.getName());
+                    file.renameTo(new File(folder, convertedName));
                 } else {
-                    convertedName = uni2zg(file.getName());
+                    convertedName = zg2uni(file.getName());
                     file.renameTo(new File(folder, convertedName));
                 }
             }
+            toast.showToast(getX(), getY() + getHeight());
+            dispose();
+        } else {
+            toast = new Toast("Please choose a folder to convert");
+            toast.showToast(getX(), getY() + getHeight());
         }
-        toast.showToast(getX(), getY() + getHeight());
     }
 }

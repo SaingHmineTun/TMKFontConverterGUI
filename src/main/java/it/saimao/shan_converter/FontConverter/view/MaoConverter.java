@@ -1,7 +1,10 @@
 package it.saimao.shan_converter.FontConverter.view;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.formdev.flatlaf.ui.FlatTitlePane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,6 +56,7 @@ public class MaoConverter extends JFrame {
 
         setSize(900, 600);
         setExtendedState(MAXIMIZED_BOTH);
+        setDefaultLookAndFeelDecorated(true);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +78,9 @@ public class MaoConverter extends JFrame {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(uniFont);
 
+        Font titleFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/robotocondensed-regular.ttf")).deriveFont(20f).deriveFont(Font.BOLD);
+        UIManager.put("TitlePane.font", titleFont);
+
         btConvert.setFont(uniFont);
         btClear.setFont(uniFont);
         btCopy.setFont(uniFont);
@@ -83,6 +90,7 @@ public class MaoConverter extends JFrame {
         rbZg2Uni.setFont(uniFont);
         lbInput.setFont(uniFont);
         lbOutput.setFont(uniFont);
+
     }
 
     public JTextArea getEdInput() {
